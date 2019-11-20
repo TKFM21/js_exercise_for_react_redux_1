@@ -5,7 +5,6 @@ describe('models/Todo TEST', () => {
         it('Instanceは_text, _completedプロパティを持っている', () => {
             const dummy = 'dummy';
             const newTodo = new Todo(dummy);
-            expect( newTodo instanceof Todo ).toStrictEqual(true);
             expect( newTodo._text ).toStrictEqual(dummy);
             expect( newTodo._completed ).toStrictEqual(false);
         });
@@ -30,9 +29,9 @@ describe('models/Todo TEST', () => {
         it('_completedプロパティが反転される', () => {
             const dummy = 'dummy';
             const newTodo = new Todo(dummy);
-            expect( newTodo._completed ).toStrictEqual(false);
+            expect( newTodo.hasCompleted() ).toStrictEqual(false);
             newTodo.toggleCompleted();
-            expect( newTodo._completed ).toStrictEqual(true);
+            expect( newTodo.hasCompleted() ).toStrictEqual(true);
         });
     });
 });
