@@ -21,7 +21,7 @@ const todoReducer = (state = [], action) => {
             const targetTodo = state[action.index];
             if (targetTodo) targetTodo.toggleCompleted();
             return state;
-    
+
         default:
             return state;
     }

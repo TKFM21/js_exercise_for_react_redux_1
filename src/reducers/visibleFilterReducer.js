@@ -13,7 +13,7 @@ const visibleFilterReducer = (state = SHOW_ALL, action) => {
         case SHOW_COMPLETED:
             return SHOW_COMPLETED;
         default:
-            return SHOW_ALL;
+            return state;
     }
 };
 
