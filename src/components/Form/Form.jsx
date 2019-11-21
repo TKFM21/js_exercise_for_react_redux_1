@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { addTodo } from '../../actions/todoActionCreator';
 
 class Form extends React.Component {
     constructor(props) {
@@ -24,7 +26,7 @@ class Form extends React.Component {
             window.alert('Please input something...');
             return
         }
-        this.props.onClickHandler(text);
+        this.props.addTodo(text);
     }
 
     render() {
@@ -45,4 +47,16 @@ class Form extends React.Component {
     }
 }
 
-export default Form;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addTodo: (text) => {
+            const addAction = addTodo(text);
+            dispatch(addAction);
+        }
+    };
+};
+
+export default connect(
+    undefined,
+    mapDispatchToProps
+)(Form);
