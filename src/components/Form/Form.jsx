@@ -1,51 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { addTodo } from '../../actions/todoActionCreator';
 
-class Form extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            text: ''
-        };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleClick = this.handleClick.bind(this);
-    }
+const Form = (props) => {
+    const [text, setText] = useState('');
 
-    handleChange(event) {
-        const field = event.target.name;
-        this.setState({
-            [field]: event.target.value
-        });
-    }
-
-    handleClick() {
-        const text = this.state.text.trim();
-        this.setState({ text: '' });
-        if (!text) {
+    const onClickHandler = () => {
+        const trimText = text.trim();
+        setText('');
+        if (!trimText) {
             window.alert('Please input something...');
             return
         }
-        this.props.addTodo(text);
-    }
+        props.addTodo(trimText);
+    };
 
-    render() {
-        return (
-            <div>
-                <label>
-                    <textarea
-                        name="text"
-                        value={ this.state.text }
-                        onChange={ this.handleChange }
-                    >
-                    </textarea>
-                </label>
-                <br />
-                <button onClick={ this.handleClick }>Add</button>
-            </div>
-        );
-    }
-}
+    return (
+        <div>
+            <label>
+                <textarea
+                    name="text"
+                    value={ text }
+                    onChange={ (event) => setText(event.target.value) }
+                >
+                </textarea>
+            </label>
+            <br />
+            <button onClick={ onClickHandler }>
+                Add
+            </button>
+        </div>
+    );
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
