@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addTodo } from '../actions/todoActionCreator';
+import Form from './Form/Form';
 
 const TodoList = (props) => {
     const todoItems = props.todos.map( (todo, index) => {
@@ -12,11 +13,7 @@ const TodoList = (props) => {
     });
     return (
         <div>
-            <button onClick={() => {
-                props.addTodo('aaa' + props.todos.length);
-            }}>
-                追加
-            </button>
+            <Form onClickHandler={ (text) => {props.addTodo(text);} }/>
             {todoItems}
         </div>
     );
