@@ -18,10 +18,14 @@ const todoReducer = (state = [], action) => {
                 return index !== action.index;
             });
         case TOGGLE_TODO_COMPLETED:
-            const targetTodo = state[action.index];
-            if (targetTodo) targetTodo.toggleCompleted();
-            return state;
-
+            return state.map( (todo, index) => {
+                if (index !== action.index) {
+                    return todo;
+                }
+                const targetTodo = new Todo(todo.text);
+                if (!todo.hasCompleted()) targetTodo.toggleCompleted();
+                return targetTodo;
+            });
         default:
             return state;
     }
