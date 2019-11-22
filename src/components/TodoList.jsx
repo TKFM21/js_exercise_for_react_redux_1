@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { toggleTodoCompleted } from '../actions/todoActionCreator';
+import { deleteTodo, toggleTodoCompleted } from '../actions/todoActionCreator';
 
 const TodoList = (props) => {
     const todoItems = props.todos.map( (todo, index) => {
@@ -9,6 +9,9 @@ const TodoList = (props) => {
                 <span>{todo.text}</span>
                 <button onClick={ () => props.toggleTodoCompleted(index) }>
                     { todo.hasCompleted() ? '完了' : '未完了' }
+                </button>
+                <button onClick={ () => props.deleteTodo(index) }>
+                    Del
                 </button>
             </div>
         );
@@ -26,6 +29,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        deleteTodo: (index) => {
+            const deleteAction = deleteTodo(index);
+            dispatch(deleteAction);
+        },
         toggleTodoCompleted: (index) => {
             const toggleAction = toggleTodoCompleted(index);
             dispatch(toggleAction);
