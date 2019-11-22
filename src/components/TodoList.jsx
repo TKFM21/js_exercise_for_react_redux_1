@@ -8,19 +8,7 @@ import {
 } from '../actions/visibleFilterActionCreator';
 
 const TodoList = (props) => {
-    const visibleFilteredTodoItems = props.todos.filter( todo => {
-        switch (props.visibleFilter) {
-            case SHOW_ALL:
-                return true;
-            case SHOW_ACTIVE:
-                return !todo.hasCompleted();
-            case SHOW_COMPLETED:
-                return todo.hasCompleted();
-            default:
-                return false;
-        }
-    });
-    const todoItems = visibleFilteredTodoItems.map( (todo, index) => {
+    const todoItems = props.todos.map( (todo, index) => {
         return (
             <div key={index}>
                 <span>{todo.text}</span>
@@ -41,8 +29,21 @@ const TodoList = (props) => {
 };
 
 const mapStateToProps = (state) => {
+    const visibleFilteredTodos = state.todos.filter( todo => {
+        switch (state.visibleFilter) {
+            case SHOW_ALL:
+                return true;
+            case SHOW_ACTIVE:
+                return !todo.hasCompleted();
+            case SHOW_COMPLETED:
+                return todo.hasCompleted();
+            default:
+                return false;
+        }
+    });
+
     return {
-        todos: state.todos,
+        todos: visibleFilteredTodos,
         visibleFilter: state.visibleFilter
     };
 };
