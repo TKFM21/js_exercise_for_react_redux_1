@@ -1,6 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { deleteTodo, toggleTodoCompleted } from '../actions/todoActionCreator';
+import {
+    SHOW_ALL,
+    SHOW_ACTIVE,
+    SHOW_COMPLETED
+} from '../actions/visibleFilterActionCreator';
 
 const TodoList = (props) => {
     const todoItems = props.todos.map( (todo, index) => {
@@ -18,13 +23,29 @@ const TodoList = (props) => {
     });
     return (
         <div>
-            {todoItems}
+            { todoItems }
         </div>
     );
 };
 
 const mapStateToProps = (state) => {
-    return { todos: state.todos };
+    const visibleFilteredTodos = state.todos.filter( todo => {
+        switch (state.visibleFilter) {
+            case SHOW_ALL:
+                return true;
+            case SHOW_ACTIVE:
+                return !todo.hasCompleted();
+            case SHOW_COMPLETED:
+                return todo.hasCompleted();
+            default:
+                return false;
+        }
+    });
+
+    return {
+        todos: visibleFilteredTodos,
+        visibleFilter: state.visibleFilter
+    };
 };
 
 const mapDispatchToProps = (dispatch) => {
