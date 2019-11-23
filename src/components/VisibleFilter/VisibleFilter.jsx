@@ -5,13 +5,14 @@ import {
     showActive,
     showCompleted
 } from '../../actions/visibleFilterActionCreator';
+import Button from '../Button/Button';
 
 const VisibleFilter = (props) => {
     return (
         <div>
-            <button onClick={ props.showAll }>ALL</button>
-            <button onClick={ props.showActive }>ACTIVE</button>
-            <button onClick={ props.showCompleted }>COMPLETED</button>
+            <Button onClickHandler={ props.showAll }>ALL</Button>
+            <Button onClickHandler={ props.showActive }>ACTIVE</Button>
+            <Button onClickHandler={ props.showCompleted }>COMP</Button>
         </div>
     );
 };

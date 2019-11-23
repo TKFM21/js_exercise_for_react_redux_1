@@ -6,18 +6,20 @@ import {
     SHOW_ACTIVE,
     SHOW_COMPLETED
 } from '../actions/visibleFilterActionCreator';
+import Button from './Button/Button';
+import './TodoList.css';
 
 const TodoList = (props) => {
     const todoItems = props.todos.map( (todo, index) => {
         return (
-            <div key={index}>
+            <div key={index} className="todo-item">
                 <span>{todo.text}</span>
-                <button onClick={ () => props.toggleTodoCompleted(index) }>
+                <Button onClickHandler={ () => props.toggleTodoCompleted(index) }>
                     { todo.hasCompleted() ? '完了' : '未完了' }
-                </button>
-                <button onClick={ () => props.deleteTodo(index) }>
+                </Button>
+                <Button onClickHandler={ () => props.deleteTodo(index) }>
                     Del
-                </button>
+                </Button>
             </div>
         );
     });

@@ -9,6 +9,7 @@ function App() {
         <div className="App">
             <h1>Todo App</h1>
             <Form />
+            <hr/>
             <VisibleFilter />
             <TodoList />
         </div>
