@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { addTodo } from '../../actions/todoActionCreator';
+import Button from '../Button/Button';
+import './Form.css';
 
 const Form = (props) => {
     const [text, setText] = useState('');
@@ -19,6 +21,7 @@ const Form = (props) => {
         <div>
             <label>
                 <textarea
+                    className="input-form"
                     name="text"
                     value={ text }
                     onChange={ (event) => setText(event.target.value) }
@@ -26,9 +29,9 @@ const Form = (props) => {
                 </textarea>
             </label>
             <br />
-            <button onClick={ onClickHandler }>
+            <Button onClickHandler={ onClickHandler }>
                 Add
-            </button>
+            </Button>
         </div>
     );
 };
