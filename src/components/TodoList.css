@@ -1,0 +1,8 @@
+.todo-item {
+    margin: 5px;
+    padding: 8px 5px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
